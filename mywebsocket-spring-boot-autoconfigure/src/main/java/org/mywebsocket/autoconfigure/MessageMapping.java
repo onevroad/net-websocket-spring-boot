@@ -1,4 +1,4 @@
-package org.mywebsocket.core;
+package org.mywebsocket.autoconfigure;
 
 import java.lang.annotation.*;
 

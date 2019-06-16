@@ -16,7 +16,7 @@ public class WebSocketHeartbeatCommand implements Runnable {
     }
 
     private void receiveHeartbeat() {
-        WebSocketClientGroup group = WebSocketService.getClientGroup();
+        WebSocketClientGroup group = WebSocketClientService.getClientGroup();
         for (WebSocketClientMap map : group.values()) {
             if (map.containsKey(request.getContext().channel().id())) {
                 WebSocketClient client = map.get(request.getContext().channel().id());

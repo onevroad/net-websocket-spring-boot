@@ -13,6 +13,6 @@ public class WebSocketRemoveCommand implements Runnable {
     @Override
     public void run() {
         context.channel().close();
-        WebSocketService.remove(this.context);
+        WebSocketClientService.remove(this.context);
     }
 }

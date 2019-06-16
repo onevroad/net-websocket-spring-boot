@@ -7,19 +7,22 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-@Setter
 @Slf4j
 public class WebSocketServer implements Runnable {
 
     private int port;
-    private int bossGroupThreads = 1;
-    private int workerGroupThreads = 0;
-    private String endPoint = "/ws";
+    private int bossGroupThreads;
+    private int workerGroupThreads;
+    private String endPoint;
+
+    public WebSocketServer(int port, int bossGroupThreads, int workerGroupThreads, String endPoint) {
+        this.port = port;
+        this.bossGroupThreads = bossGroupThreads;
+        this.workerGroupThreads = workerGroupThreads;
+        this.endPoint = endPoint;
+    }
 
     @Override
     public void run() {

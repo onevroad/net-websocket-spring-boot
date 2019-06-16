@@ -12,7 +12,7 @@ public class WebSocketPublishCommand implements Runnable {
 
     @Override
     public void run() {
-        WebSocketClientGroup group = WebSocketService.getClientGroup();
+        WebSocketClientGroup group = WebSocketClientService.getClientGroup();
         if (group.containsKey(topic)) {
             WebSocketClientMap map = group.get(topic);
             for (WebSocketClient client : map.values()) {

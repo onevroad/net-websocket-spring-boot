@@ -12,8 +12,8 @@ public class WebSocketSubscribeCommand implements Runnable {
     @Override
     public void run() {
         for (String topic : request.getTopic()) {
-            WebSocketClient client = WebSocketService.subscribe(request.getContext(), topic);
-            //TODO 执行订阅操作
+            WebSocketClient client = WebSocketClientService.subscribe(request.getContext(), topic);
+            WebSocketServerService.onSubscribe(client, topic, request.getData());
         }
     }
 }

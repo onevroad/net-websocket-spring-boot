@@ -1,20 +1,11 @@
 package org.mywebsocket.core;
 
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class WebSocketService {
+public class WebSocketClientService {
 
-    private static WebSocketServer server = new WebSocketServer();
     private static WebSocketClientGroup group = new WebSocketClientGroup();
-
-    public static void start(int port) {
-        server.setPort(port);
-        server.run();
-    }
 
     public static WebSocketClient subscribe(ChannelHandlerContext context, String topic) {
         if (group.containsKey(topic)) {

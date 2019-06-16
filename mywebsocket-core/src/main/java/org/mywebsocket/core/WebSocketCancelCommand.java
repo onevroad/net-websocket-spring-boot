@@ -13,31 +13,31 @@ public class WebSocketCancelCommand implements Runnable {
     public void run() {
         for (String topic : request.getTopic()) {
             if ("all".equals(topic)) {
-                cancel();
+                cancel(request.getData());
                 break;
             } else {
-                cancel(topic);
+                cancel(topic, request.getData());
             }
         }
     }
 
-    private void cancel() {
-        WebSocketClientGroup group = WebSocketService.getClientGroup();
+    private void cancel(String data) {
+        WebSocketClientGroup group = WebSocketClientService.getClientGroup();
         for (WebSocketClientMap map : group.values()) {
             if (map.containsKey(request.getContext().channel().id())) {
                 WebSocketClient client = map.get(request.getContext().channel().id());
-                client.cancel();
+                client.cancel(data);
             }
         }
     }
 
-    private void cancel(String topic) {
-        WebSocketClientGroup group = WebSocketService.getClientGroup();
+    private void cancel(String topic, String data) {
+        WebSocketClientGroup group = WebSocketClientService.getClientGroup();
         if (group.containsKey(topic)) {
             WebSocketClientMap map = group.get(topic);
             if (map.containsKey(request.getContext().channel().id())) {
                 WebSocketClient client = map.get(request.getContext().channel().id());
-                client.cancel(topic);
+                client.cancel(topic, data);
             }
         }
     }
