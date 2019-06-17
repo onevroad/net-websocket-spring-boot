@@ -2,20 +2,20 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.mywebsocket</groupId>
-    <artifactId>mywebsocket-spring-boot</artifactId>
+    <groupId>org.net.websocket</groupId>
+    <artifactId>net-websocket-spring-boot</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>mywebsocket-spring-boot</name>
+    <name>net-websocket-spring-boot</name>
     <description>Spring Boot Support for Websocket</description>
-    <url>https://github.com/myflyheart/mywebsocket-spring-boot-starter/</url>
+    <url>https://github.com/myflyheart/net-websocket-spring-boot-starter/</url>
 
     <modules>
-        <module>mywebsocket-spring-boot-autoconfigure</module>
-        <module>mywebsocket-spring-boot-starter</module>
-        <module>mywebsocket-spring-boot-samples</module>
-        <module>mywebsocket-core</module>
+        <module>net-websocket-core</module>
+        <module>net-websocket-spring-boot-autoconfigure</module>
+        <module>net-websocket-spring-boot-starter</module>
+        <module>net-websocket-spring-boot-samples</module>
     </modules>
 
     <properties>
@@ -27,18 +27,18 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.mywebsocket</groupId>
-                <artifactId>mywebsocket-core</artifactId>
+                <groupId>org.net.websocket</groupId>
+                <artifactId>net-websocket-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.mywebsocket</groupId>
-                <artifactId>mywebsocket-spring-boot-autoconfigure</artifactId>
+                <groupId>org.net.websocket</groupId>
+                <artifactId>net-websocket-spring-boot-autoconfigure</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.mywebsocket</groupId>
-                <artifactId>mywebsocket-spring-boot-starter</artifactId>
+                <groupId>org.net.websocket</groupId>
+                <artifactId>net-websocket-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
