@@ -25,15 +25,46 @@
 2. 自己实现WebSocketEventHandler或WebSocketCustomizeEventHandler接口，并添加注解和主题信息@MessageListener("test")，WebSocketCustomizeEventHandler主题信息在equalsTopic方法中配置
 ```java
 @MessageListener("test")
-public class SampleMessageEventHandler implements WebSocketEventHandler<String>
+public class SampleMessageEventHandler implements WebSocketEventHandler<String> {
+    @Override
+    public String onSubscribe(String topic, String data) {
+        return "subscribe success!";
+    }
+
+    @Override
+    public String onMessage(String topic, String data) {
+        return "message received!";
+    }
+
+    @Override
+    public String onCancel(String topic, String data) {
+        return "cancel success!";
+    }
+}
 ```
 
 ```java
-@MessageListener("test")
-public class SampleMessageEventHandler implements WebSocketCustomizeEventHandler<String> {
-     public boolean equalsTopic(String topic) {
-         return "test2".equals(topic);
-     }
+@MessageListener
+public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String> {
+    @Override
+    public boolean equalsTopic(String topic) {
+        return "test2".equals(topic);
+    }
+
+    @Override
+    public String onSubscribe(String topic, String data) {
+        return "subscribe success!";
+    }
+
+    @Override
+    public String onMessage(String topic, String data) {
+        return "message received!";
+    }
+
+    @Override
+    public String onCancel(String topic, String data) {
+        return "cancel success!";
+    }
 }
 ```
 
