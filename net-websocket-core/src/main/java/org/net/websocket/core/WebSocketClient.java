@@ -12,7 +12,7 @@ public class WebSocketClient {
     private List<String> topics = new ArrayList<>();
     private Long lastUpdateTime = System.currentTimeMillis();
     private Long inactiveTime = 60000L;
-    private TextWebSocketFrame heartbeat = new TextWebSocketFrame("{\"event\":\"heartbeat\",\"data\":\"ping\"}");
+    private String heartbeat = "{\"event\":\"heartbeat\",\"data\":\"ping\"}";
 
     public WebSocketClient(Channel channel) {
         this.channel = channel;
@@ -31,7 +31,7 @@ public class WebSocketClient {
     }
 
     public void sendHeartbeat() {
-        channel.writeAndFlush(heartbeat);
+        channel.writeAndFlush(new TextWebSocketFrame(heartbeat));
     }
 
     public void receiveHeartbeat() {
@@ -62,6 +62,14 @@ public class WebSocketClient {
     }
 
     public boolean isActive() {
-        return System.currentTimeMillis() - lastUpdateTime > inactiveTime;
+        return System.currentTimeMillis() - lastUpdateTime <= inactiveTime;
+    }
+
+    public boolean needClose() {
+        return System.currentTimeMillis() - lastUpdateTime > inactiveTime * 3;
+    }
+
+    public void close() {
+        channel.close();
     }
 }

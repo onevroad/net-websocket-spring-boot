@@ -29,6 +29,7 @@ public class WebSocketServerService {
     }
 
     public static void start(int port, int bossGroupThreads, int workerGroupThreads, String endPoint) {
+        WebSocketChannelCheckCommandExecutor.execute(new WebSocketChannelCheckCommand());
         server = new WebSocketServer(port, bossGroupThreads, workerGroupThreads, endPoint);
         server.run();
     }

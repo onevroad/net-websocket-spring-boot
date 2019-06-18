@@ -34,7 +34,7 @@ public class WebSocketRequestDecoder {
 
             return request;
         } catch (Exception e) {
-            log.error("webSocketRequest decode exception!", e);
+            log.error("WebSocketRequest decode exception!", e);
             return null;
         }
     }

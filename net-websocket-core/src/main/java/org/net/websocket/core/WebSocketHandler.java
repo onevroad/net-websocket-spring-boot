@@ -21,7 +21,7 @@ public class WebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketF
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-
+        WebSocketClientService.active(ctx);
     }
 
     @Override
