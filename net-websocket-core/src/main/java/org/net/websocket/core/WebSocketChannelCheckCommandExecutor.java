@@ -10,7 +10,11 @@ public class WebSocketChannelCheckCommandExecutor {
 
     private static ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1, new ThreadFactoryBuilder().setNameFormat("channel-check-%d").build());
 
-    public static void execute(Runnable command) {
+    private static void execute(Runnable command) {
         executor.scheduleAtFixedRate(command, 0, 60, TimeUnit.SECONDS);
+    }
+
+    public static void start() {
+        execute(new WebSocketChannelCheckCommand());
     }
 }
