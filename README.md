@@ -36,7 +36,7 @@
 - 添加依赖
 ```
 <dependency>
-    <groupId>org.net.websocket</groupId>
+    <groupId>org.onevroad</groupId>
     <artifactId>net-websocket-spring-boot-starter</artifactId>
     <version>0.1.0</version>
 </dependency>

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>net-websocket-spring-boot</artifactId>
-        <groupId>org.net.websocket</groupId>
+        <groupId>org.onevroad</groupId>
         <version>0.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -17,7 +17,7 @@
             <artifactId>snakeyaml</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.net.websocket</groupId>
+            <groupId>org.onevroad</groupId>
             <artifactId>net-websocket-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
