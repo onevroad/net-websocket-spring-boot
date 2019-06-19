@@ -1,6 +1,6 @@
 package org.net.websocket.autoconfigure;
 
-import org.net.websocket.annotation.MessageListener;
+import org.net.websocket.annotation.WebSocketListener;
 import org.net.websocket.core.WebSocketCustomizeEventHandler;
 import org.net.websocket.core.WebSocketEventHandler;
 import org.net.websocket.core.WebSocketServerService;
@@ -15,7 +15,7 @@ public class WebSocketHandlerBeanPostProcessor implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         Class<?> clazz = AopUtils.getTargetClass(bean);
-        MessageListener annotation = clazz.getAnnotation(MessageListener.class);
+        WebSocketListener annotation = clazz.getAnnotation(WebSocketListener.class);
         if (annotation != null) {
             if (WebSocketEventHandler.class.isAssignableFrom(clazz)) {
                 WebSocketServerService.addHandler(annotation.value(), (WebSocketEventHandler) bean);

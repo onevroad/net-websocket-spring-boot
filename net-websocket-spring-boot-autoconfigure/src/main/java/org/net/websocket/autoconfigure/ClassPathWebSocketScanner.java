@@ -1,6 +1,6 @@
 package org.net.websocket.autoconfigure;
 
-import org.net.websocket.annotation.MessageListener;
+import org.net.websocket.annotation.WebSocketListener;
 import org.springframework.beans.factory.annotation.AnnotatedBeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
@@ -17,9 +17,9 @@ public class ClassPathWebSocketScanner extends ClassPathBeanDefinitionScanner {
     }
 
     public void registerFilters() {
-        this.addIncludeFilter(new AnnotationTypeFilter(MessageListener.class));
+        this.addIncludeFilter(new AnnotationTypeFilter(WebSocketListener.class));
 
-        this.addExcludeFilter((metadataReader, metadataReaderFactory) -> !metadataReader.getAnnotationMetadata().hasAnnotation("org.net.websocket.annotation.MessageListener"));
+        this.addExcludeFilter((metadataReader, metadataReaderFactory) -> !metadataReader.getAnnotationMetadata().hasAnnotation("org.net.websocket.annotation.WebSocketListener"));
     }
 
     @Override

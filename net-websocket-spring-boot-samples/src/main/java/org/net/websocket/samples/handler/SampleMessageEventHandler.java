@@ -1,11 +1,11 @@
 package org.net.websocket.samples.handler;
 
 import lombok.extern.slf4j.Slf4j;
-import org.net.websocket.annotation.MessageListener;
+import org.net.websocket.annotation.WebSocketListener;
 import org.net.websocket.core.WebSocketEventHandler;
 
 @Slf4j
-@MessageListener("test")
+@WebSocketListener("test")
 public class SampleMessageEventHandler implements WebSocketEventHandler<String> {
     @Override
     public String onSubscribe(String topic, String data) {
