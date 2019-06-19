@@ -102,6 +102,21 @@ public class WebSocketApplication {
 }
 ```
 
+- 配置参数
+```yaml
+net:
+  websocket:
+    # 监听端口
+    port: 80
+    # 监听线程数，默认1个线程
+    boss-group-threads: 1
+    # 工作线程数，默认0为CPU核心数
+    worker-group-threads: 0
+    # 请求路径
+    end-point: /ws
+```
+port: 监听端口
+
 - 发送消息
 
 使用WebSocketMessagePublisher的publish，有两个参数：topic: 主题信息; message: 消息内容
