@@ -1,7 +1,8 @@
-# net-websocket-spring-boot-starter
+# net-websocket-spring-boot-starter[![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-## 设计目的
-让大家能更方便的使用websocket
+基于netty实现的websocket，使用更简单
+
+支持jdk版本为1.8或者1.8+
 
 ## 请求数据格式
 ```json
@@ -121,5 +122,9 @@ port: 监听端口
 
 使用WebSocketMessagePublisher的publish，有两个参数：topic: 主题信息; message: 消息内容
 ```java
-WebSocketMessagePublisher.publish("topic", "消息内容");
+public class SendMessageHandler {
+    public static void send(String topic, String message) {
+        WebSocketMessagePublisher.publish(topic, message);
+    }
+}
 ```
