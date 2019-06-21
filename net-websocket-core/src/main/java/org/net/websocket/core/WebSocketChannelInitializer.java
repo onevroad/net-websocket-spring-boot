@@ -23,15 +23,11 @@ public class WebSocketChannelInitializer extends ChannelInitializer<SocketChanne
         pipeline.addLast("httpServerCodec", new HttpServerCodec());
         //ChunkedWriteHandler分块写处理，文件过大会将内存撑爆
         pipeline.addLast("chunkedWriteHandler", new ChunkedWriteHandler());
-        /**
-         * 作用是将一个Http的消息组装成一个HttpRequest或者HttpResponse，那么具体的是什么
-         * 取决于是请求还是响应, 该Handler必须放在HttpServerCodec后的后面
-         */
+        //作用是将一个Http的消息组装成一个HttpRequest或者HttpResponse, 该Handler必须放在HttpServerCodec后的后面
         pipeline.addLast("httpObjectAggregator", new HttpObjectAggregator(8192));
-
         //用于处理websocket, /ws为访问websocket时的uri
         pipeline.addLast("webSocketServerProtocolHandler", new WebSocketServerProtocolHandler(endPoint));
-
+        //自定义处理器
         pipeline.addLast("myWebSocketHandler", new WebSocketHandler());
     }
 }

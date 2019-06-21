@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.onevroad</groupId>
     <artifactId>net-websocket-spring-boot</artifactId>
-    <version>0.2.0</version>
+    <version>0.1.1</version>
     <packaging>pom</packaging>
 
     <name>net-websocket-spring-boot</name>
@@ -36,11 +36,16 @@
         <module>net-websocket-core</module>
         <module>net-websocket-spring-boot-autoconfigure</module>
         <module>net-websocket-spring-boot-starter</module>
-        <module>net-websocket-spring-boot-samples</module>
+<!--        <module>net-websocket-spring-boot-samples</module>-->
     </modules>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
+        <netty.version>4.1.16.Final</netty.version>
+        <fastjson.version>1.2.58</fastjson.version>
+        <guava.version>28.0-jre</guava.version>
     </properties>
 
 
@@ -68,6 +73,21 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
