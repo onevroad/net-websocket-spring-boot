@@ -16,9 +16,9 @@ public class WebsocketAutoConfiguration {
     @Autowired
     private WebsocketProperties properties;
 
-    @Bean(initMethod = "init")
+    @Bean(initMethod = "start")
     @ConditionalOnMissingBean
-    public WebSocketServerInitialization initialization() {
-        return new WebSocketServerInitialization(properties);
+    public WebSocketServerStarter initialization() {
+        return new WebSocketServerStarter(properties);
     }
 }
