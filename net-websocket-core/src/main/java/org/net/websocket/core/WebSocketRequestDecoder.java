@@ -1,6 +1,10 @@
 package org.net.websocket.core;
 
 
+import static org.net.websocket.core.Constants.DATA;
+import static org.net.websocket.core.Constants.EVENT;
+import static org.net.websocket.core.Constants.TOPIC;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.ChannelHandlerContext;
@@ -17,18 +21,18 @@ public class WebSocketRequestDecoder {
 
             request.setContext(ctx);
 
-            if (input.containsKey("event")) {
-                String event = input.getString("event");
+            if (input.containsKey(EVENT)) {
+                String event = input.getString(EVENT);
                 request.setEvent(event);
             }
 
-            if (input.containsKey("topic")) {
-                String[] topic = input.getObject("topic", String[].class);
+            if (input.containsKey(TOPIC)) {
+                String[] topic = input.getObject(TOPIC, String[].class);
                 request.setTopic(topic);
             }
 
-            if (input.containsKey("data")) {
-                String data = input.getString("data");
+            if (input.containsKey(DATA)) {
+                String data = input.getString(DATA);
                 request.setData(data);
             }
 

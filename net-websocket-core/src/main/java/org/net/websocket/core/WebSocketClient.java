@@ -1,5 +1,7 @@
 package org.net.websocket.core;
 
+import static org.net.websocket.core.Constants.HEARTBEAT_TEXT;
+
 import io.netty.channel.Channel;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
@@ -12,7 +14,6 @@ public class WebSocketClient {
     private List<String> topics = new ArrayList<>();
     private Long lastUpdateTime = System.currentTimeMillis();
     private Long inactiveTime = 60000L;
-    private String heartbeat = "{\"event\":\"heartbeat\",\"data\":\"ping\"}";
 
     public WebSocketClient(Channel channel) {
         this.channel = channel;
@@ -31,7 +32,7 @@ public class WebSocketClient {
     }
 
     public void sendHeartbeat() {
-        channel.writeAndFlush(new TextWebSocketFrame(heartbeat));
+        channel.writeAndFlush(new TextWebSocketFrame(HEARTBEAT_TEXT));
     }
 
     public void receiveHeartbeat() {

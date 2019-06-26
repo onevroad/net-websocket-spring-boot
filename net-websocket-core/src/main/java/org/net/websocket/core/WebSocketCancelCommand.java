@@ -1,6 +1,8 @@
 package org.net.websocket.core;
 
 
+import static org.net.websocket.core.Constants.TOPIC_ALL;
+
 public class WebSocketCancelCommand implements Runnable {
 
     private WebSocketRequest request;
@@ -12,7 +14,7 @@ public class WebSocketCancelCommand implements Runnable {
     @Override
     public void run() {
         for (String topic : request.getTopic()) {
-            if ("all".equals(topic)) {
+            if (TOPIC_ALL.equalsIgnoreCase(topic)) {
                 cancel(request.getData());
                 break;
             } else {
