@@ -2,12 +2,17 @@ package org.net.websocket.samples.handler;
 
 import org.net.websocket.annotation.WebSocketListener;
 import org.net.websocket.core.WebSocketCustomizeEventHandler;
+import org.springframework.beans.factory.annotation.Value;
 
 @WebSocketListener
 public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String> {
+
+    @Value("test2")
+    private String topic;
+
     @Override
     public boolean equalsTopic(String topic) {
-        return "test2".equals(topic);
+        return this.topic.equals(topic);
     }
 
     @Override
