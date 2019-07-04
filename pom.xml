@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.onevroad</groupId>
     <artifactId>net-websocket-spring-boot</artifactId>
-    <version>0.1.2</version>
+    <version>0.1.3</version>
     <packaging>pom</packaging>
 
     <name>net-websocket-spring-boot</name>
