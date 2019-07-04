@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 @WebSocketListener
 public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String> {
 
-    @Value("test2")
+    @Value("${test.topic}")
     private String topic;
 
     @Override

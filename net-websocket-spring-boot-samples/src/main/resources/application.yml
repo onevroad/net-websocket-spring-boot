@@ -8,3 +8,6 @@ net:
     worker-group-threads: 0
     # 请求路径
     end-point: /ws
+
+test:
+  topic: test2
