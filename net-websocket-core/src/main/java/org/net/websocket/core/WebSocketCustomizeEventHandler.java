@@ -1,13 +1,13 @@
 package org.net.websocket.core;
 
 
-public interface WebSocketCustomizeEventHandler<T> {
+public interface WebSocketCustomizeEventHandler {
 
     boolean equalsTopic(String topic);
 
-    T onSubscribe(String topic, String data);
+    String onSubscribe(String topic, String data);
 
-    T onMessage(String topic, String data);
+    String onMessage(String topic, String data);
 
-    T onCancel(String topic, String data);
+    String onCancel(String topic, String data);
 }

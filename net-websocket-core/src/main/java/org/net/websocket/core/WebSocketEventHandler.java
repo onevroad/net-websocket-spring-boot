@@ -1,10 +1,10 @@
 package org.net.websocket.core;
 
-public interface WebSocketEventHandler<T>  {
+public interface WebSocketEventHandler  {
 
-    T onSubscribe(String topic, String data);
+    String onSubscribe(String topic, String data);
 
-    T onMessage(String topic, String data);
+    String onMessage(String topic, String data);
 
-    T onCancel(String topic, String data);
+    String onCancel(String topic, String data);
 }
