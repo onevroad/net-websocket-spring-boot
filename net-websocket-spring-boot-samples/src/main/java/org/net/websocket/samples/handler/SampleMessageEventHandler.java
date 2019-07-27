@@ -6,7 +6,7 @@ import org.net.websocket.core.WebSocketEventHandler;
 
 @Slf4j
 @WebSocketListener("test")
-public class SampleMessageEventHandler implements WebSocketEventHandler<String> {
+public class SampleMessageEventHandler implements WebSocketEventHandler {
     @Override
     public String onSubscribe(String topic, String data) {
         log.info("subscribe topic: {}, data: {}", topic, data);

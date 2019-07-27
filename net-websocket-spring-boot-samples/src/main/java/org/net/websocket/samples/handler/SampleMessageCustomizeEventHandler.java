@@ -5,7 +5,7 @@ import org.net.websocket.core.WebSocketCustomizeEventHandler;
 import org.springframework.beans.factory.annotation.Value;
 
 @WebSocketListener
-public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String> {
+public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler {
 
     @Value("${test.topic}")
     private String topic;

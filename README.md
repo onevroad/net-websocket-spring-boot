@@ -49,7 +49,7 @@
 对于确定的topic，可实现WebSocketEventHandler事件处理器，通过注解管理topic
 ```java
 @WebsocketListener("test")
-public class SampleMessageEventHandler implements WebSocketEventHandler<String> {
+public class SampleMessageEventHandler implements WebSocketEventHandler {
     @Override
     public String onSubscribe(String topic, String data) {
         return "subscribe success!";
@@ -69,7 +69,7 @@ public class SampleMessageEventHandler implements WebSocketEventHandler<String> 
 对应动态的topic，可实现WebSocketCustomizeEventHandler事件处理器，通过equalsTopic管理topic
 ```java
 @WebsocketListener
-public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String> {
+public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler {
     @Override
     public boolean equalsTopic(String topic) {
         return "test2".equals(topic);
