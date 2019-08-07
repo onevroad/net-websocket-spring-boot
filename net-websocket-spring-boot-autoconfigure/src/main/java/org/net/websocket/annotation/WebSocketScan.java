@@ -11,5 +11,8 @@ import java.lang.annotation.*;
 @Import({WebSocketScannerRegistrar.class})
 public @interface WebSocketScan {
 
+    /**
+     * 扫描路径
+     */
     String[] basePackages() default {};
 }

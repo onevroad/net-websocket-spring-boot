@@ -8,5 +8,8 @@ import java.lang.annotation.*;
 @Documented
 public @interface WebSocketListener {
 
+    /**
+     * 订阅主题，topic
+     */
     String value() default "";
 }
