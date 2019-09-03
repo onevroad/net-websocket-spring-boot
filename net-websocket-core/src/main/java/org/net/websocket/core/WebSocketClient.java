@@ -3,6 +3,7 @@ package org.net.websocket.core;
 import static org.net.websocket.core.Constants.HEARTBEAT_TEXT;
 
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
 import java.util.ArrayList;
@@ -21,13 +22,19 @@ public class WebSocketClient {
 
     public void send(String topic, String message) {
         if (this.topics.contains(topic)) {
-            channel.writeAndFlush(new TextWebSocketFrame(message));
-            lastUpdateTime = System.currentTimeMillis();
+            sendSimple(topic, message);
         }
     }
 
-    public void send(String message) {
-        channel.writeAndFlush(new TextWebSocketFrame(message));
+    public void sendSimple(String topic, String message) {
+        ChannelFuture channelFuture = channel.writeAndFlush(new TextWebSocketFrame(message));
+        channelFuture.addListener(new WebSocketChannelListener(new RetryMessage(this, topic, message)));
+        lastUpdateTime = System.currentTimeMillis();
+    }
+
+    public void send(RetryMessage retryMessage) {
+        ChannelFuture channelFuture = channel.writeAndFlush(new TextWebSocketFrame(retryMessage.getMessage()));
+        channelFuture.addListener(new WebSocketChannelListener(retryMessage));
         lastUpdateTime = System.currentTimeMillis();
     }
 

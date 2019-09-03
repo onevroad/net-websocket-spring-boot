@@ -48,7 +48,7 @@ public class WebSocketServerService {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
                 String message = handler.onSubscribe(topic, data);
                 if (message != null) {
-                    client.send(JSON.toJSONString(message));
+                    client.sendSimple(topic, JSON.toJSONString(message));
                 }
             }
         }
@@ -56,7 +56,7 @@ public class WebSocketServerService {
             if (customizeHandler.equalsTopic(topic)) {
                 String message = customizeHandler.onSubscribe(topic, data);
                 if (message != null) {
-                    client.send(JSON.toJSONString(message));
+                    client.sendSimple(topic, JSON.toJSONString(message));
                 }
             }
         }
@@ -68,7 +68,7 @@ public class WebSocketServerService {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
                 String message = handler.onMessage(topic, data);
                 if (message != null) {
-                    client.send(JSON.toJSONString(message));
+                    client.sendSimple(topic, JSON.toJSONString(message));
                 }
             }
         }
@@ -76,7 +76,7 @@ public class WebSocketServerService {
             if (customizeHandler.equalsTopic(topic)) {
                 String message = customizeHandler.onMessage(topic, data);
                 if (message != null) {
-                    client.send(JSON.toJSONString(message));
+                    client.sendSimple(topic, JSON.toJSONString(message));
                 }
             }
         }
@@ -88,7 +88,7 @@ public class WebSocketServerService {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
                 String message = handler.onCancel(topic, data);
                 if (message != null) {
-                    client.send(JSON.toJSONString(message));
+                    client.sendSimple(topic, JSON.toJSONString(message));
                 }
             }
         }
@@ -96,7 +96,7 @@ public class WebSocketServerService {
             if (customizeHandler.equalsTopic(topic)) {
                 String message = customizeHandler.onCancel(topic, data);
                 if (message != null) {
-                    client.send(JSON.toJSONString(message));
+                    client.sendSimple(topic, JSON.toJSONString(message));
                 }
             }
         }
