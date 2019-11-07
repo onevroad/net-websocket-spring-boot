@@ -15,4 +15,6 @@ public class WebsocketProperties {
     private int workerGroupThreads = 0;
 
     private String endPoint = "/ws";
+
+    private WebsocketRetryProperties retry;
 }

@@ -1,6 +1,7 @@
 package org.net.websocket.autoconfigure;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import org.net.websocket.core.WebSocketRetryService;
 import org.net.websocket.core.WebSocketServerService;
 
 import java.util.concurrent.LinkedBlockingQueue;
@@ -21,6 +22,9 @@ public class WebSocketServerStarter {
 
     public void start() {
         executor.execute(() -> WebSocketServerService.start(properties.getPort(), properties.getBossGroupThreads(), properties.getWorkerGroupThreads(), properties.getEndPoint()));
+        if (properties.getRetry().isEnable()) {
+            WebSocketRetryService.enable(properties.getRetry().getMaxRetryTime(), properties.getRetry().getRetryInterval());
+        }
     }
 
 }
