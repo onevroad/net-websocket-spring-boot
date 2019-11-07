@@ -37,4 +37,12 @@ public class WebSocketRetryService {
             RetryQueue.add(message);
         }
     }
+
+    public static boolean isContinueRetry(int retryTime) {
+        return retryTime <= maxRetryTime;
+    }
+
+    public static boolean isRetryTime(long lastSendTime) {
+        return System.currentTimeMillis() - lastSendTime >= retryInterval;
+    }
 }
