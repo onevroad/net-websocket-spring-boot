@@ -2,10 +2,12 @@ package org.net.websocket.autoconfigure;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 
 @Data
 @ConfigurationProperties(prefix = "net.websocket")
+@EnableConfigurationProperties(WebsocketRetryProperties.class)
 public class WebsocketProperties {
 
     private int port = 80;

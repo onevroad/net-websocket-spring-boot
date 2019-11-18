@@ -8,6 +8,14 @@ net:
     worker-group-threads: 0
     # 请求路径
     end-point: /ws
+    # 重试配置
+    retry:
+      # 是否启用重试机制
+      enable: true
+      # 最大重试次数，默认3次
+      max-retry-time: 3
+      # 重试间隔，单位：毫秒，默认1000ms
+      retry-interval: 1000
 
 test:
   topic: test2
