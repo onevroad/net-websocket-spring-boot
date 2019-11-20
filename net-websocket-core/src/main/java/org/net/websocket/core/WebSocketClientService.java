@@ -1,6 +1,9 @@
 package org.net.websocket.core;
 
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelId;
+import java.util.Iterator;
+import java.util.Map.Entry;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -66,4 +69,21 @@ public class WebSocketClientService {
         return group;
     }
 
+    public static boolean publishSync(String topic, String message) {
+        if (group.containsKey(topic)) {
+            WebSocketClientMap clients = group.get(topic);
+            if (clients.isEmpty()) {
+                return false;
+            }
+            Iterator<Entry<ChannelId, WebSocketClient>> iterator = clients.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Entry<ChannelId, WebSocketClient> entry = iterator.next();
+                WebSocketClient client = entry.getValue();
+                client.send(topic, message);
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
 }

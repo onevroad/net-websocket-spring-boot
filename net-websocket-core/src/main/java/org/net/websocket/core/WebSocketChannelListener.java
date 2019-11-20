@@ -7,9 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WebSocketChannelListener implements GenericFutureListener<ChannelFuture> {
 
-    private RetryMessage message;
+    private ErrorRetryMessage message;
 
-    public WebSocketChannelListener(RetryMessage message) {
+    public WebSocketChannelListener(ErrorRetryMessage message) {
         this.message = message;
     }
 
