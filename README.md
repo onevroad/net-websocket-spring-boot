@@ -1,41 +1,41 @@
-# net-websocket-spring-boot-starter[![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+# net-websocket-spring-boot-starter [![License](http://img.shields.io/:license-apache-brightgreen.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-基于netty实现的websocket，使用更简单
+The WebSocket is based on netty. It's easier to use for somebody who want to build a WebSocket in a short time.
 
-支持jdk版本为1.8或者1.8+
+Support jdk version 1.8 or 1.8+
 
-## 请求数据格式
+## Request Data Format
 ```json
 {
-  "e": "事件类型",
-  "t": ["主题信息"],
-  "d": "自定义数据"
+  "e": "event type",
+  "t": ["topic name"],
+  "d": "data"
 }
 ```
 - e:event, t:topic, d:data
-- 事件类型目前支持：subscribe(订阅), message(通信), cancel(取消订阅), heartbeat(心跳，由系统自动发送)
-- 除心跳事件外，topic为必填项，可同时发送多个topic
-- 响应数据格式无要求，可自定义返回
+- support event type：subscribe, message, cancel, heartbeat
+- The topic is required except for the heartbeat events.You can send multiple topics at the same time.
+- You can customize the response data format.
 
-## 心跳事件
-- 当客户端和服务端在1分钟内无数据交互时，服务端会发送心跳事件，数据格式如下：
+## Heartbeat Event
+- The server will send a heartbeat event when the client and server have no data interaction within 1 minute. The data format that the server send is like this：
 ```json
 {
   "e": "heartbeat",
   "d": "ping"
 }
 ```
-- 客户端收到心跳数据时，请发送以下数据进行响应：
+- If the client receive a heartbeat event, please send a data for responsing the server. The data format is like this：
 ```json
 {
   "e": "heartbeat",
   "d": "pong"
 }
 ```
-- 若服务端发送2次心跳事件仍无响应时，会断开连接
+- The connection will be disconnected when the server who send the heartbeat event twice din't receive any response.
 
-## 快速开始
-- 添加依赖
+## Quick Start
+- add maven dependency
 ```
 <dependency>
     <groupId>org.onevroad</groupId>
@@ -44,9 +44,9 @@
 </dependency>
 ```
 
-- 定义每个topic的事件处理器，返回值是对客户端的响应数据，返回值为空则不响应
+- You need implement WebSocketEventHandler or WebSocketCustomizeEventHandler for every topic that you have.
 
-对于确定的topic，可实现WebSocketEventHandler事件处理器，通过注解管理topic
+For the definite topics, you can implement WebSocketEventHandler with the WebsocketListener annotation.
 ```java
 @WebsocketListener("test")
 public class SampleMessageEventHandler implements WebSocketEventHandler {
@@ -66,7 +66,7 @@ public class SampleMessageEventHandler implements WebSocketEventHandler {
     }
 }
 ```
-对应动态的topic，可实现WebSocketCustomizeEventHandler事件处理器，通过equalsTopic管理topic
+For the dynamic topics, you can implement WebSocketCustomizeEventHandler and override the equalsTopic method.
 ```java
 @WebsocketListener
 public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler {
@@ -92,7 +92,7 @@ public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEve
 }
 ```
 
-- 配置扫描路径
+- configure the scan package where your implementers are.
 ```java
 @EnableAutoConfiguration
 @WebSocketScan(basePackages = {"org.net.websocket.samples.handler"})
@@ -104,24 +104,23 @@ public class WebSocketApplication {
 }
 ```
 
-- 配置参数
+- configure parameter
 ```yaml
 net:
   websocket:
-    # 监听端口
+    # Listening port
     port: 80
-    # 监听线程数，默认1个线程
+    # The number of listening threads, default 1 thread
     boss-group-threads: 1
-    # 工作线程数，默认0为CPU核心数
+    # The number of worker threads, default 0 is the number of CPU cores
     worker-group-threads: 0
-    # 请求路径
+    # Request path
     end-point: /ws
 ```
-port: 监听端口
 
-- 发送消息
+- send message
 
-使用WebSocketMessagePublisher的publish，有两个参数：topic: 主题信息; message: 消息内容
+You can use the publish method of the WebSocketMessagePublisher class to send your message.
 ```java
 public class SendMessageHandler {
     public static void send(String topic, String message) {
@@ -129,8 +128,4 @@ public class SendMessageHandler {
     }
 }
 ```
-## 后续发展
-- ~~发送消息支持失败重试~~（0.1.7-SNAPSHOT）
-- ~~发送消息支持队列缓存，重连后立即推送（单订阅者）~~（0.1.7-SNAPSHOT）
-- 发送数据支持多种数据类型
-- 接收数据支持自定义数据类型
+
