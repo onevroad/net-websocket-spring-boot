@@ -32,7 +32,7 @@ Support jdk version 1.8 or 1.8+
   "d": "pong"
 }
 ```
-- The connection will be disconnected when the server who send the heartbeat event twice din't receive any response.
+- The connection will be disconnected when the server who sended the heartbeat event twice din't receive any response.
 
 ## Quick Start
 - add maven dependency
