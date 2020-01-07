@@ -112,7 +112,7 @@ net:
     port: 80
     # The number of listening threads, default 1 thread
     boss-group-threads: 1
-    # The number of worker threads, default 0 is the number of CPU cores
+    # The number of working threads, default 0 is the number of CPU cores
     worker-group-threads: 0
     # Request path
     end-point: /ws
