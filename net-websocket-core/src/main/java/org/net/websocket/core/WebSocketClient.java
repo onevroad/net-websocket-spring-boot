@@ -28,14 +28,14 @@ public class WebSocketClient {
 
     public void sendSimple(String topic, String message) {
         ChannelFuture channelFuture = channel.write(new TextWebSocketFrame(message));
-        channelFuture.addListener(new WebSocketChannelListener(new RetryMessage(this, topic, message)));
+        channelFuture.addListener(new WebSocketChannelListener(new ErrorRetryMessage(this, topic, message)));
         channel.flush();
         lastUpdateTime = System.currentTimeMillis();
     }
 
-    public void send(RetryMessage retryMessage) {
-        ChannelFuture channelFuture = channel.write(new TextWebSocketFrame(retryMessage.getMessage()));
-        channelFuture.addListener(new WebSocketChannelListener(retryMessage));
+    public void send(ErrorRetryMessage errorRetryMessage) {
+        ChannelFuture channelFuture = channel.write(new TextWebSocketFrame(errorRetryMessage.getMessage()));
+        channelFuture.addListener(new WebSocketChannelListener(errorRetryMessage));
         channel.flush();
         lastUpdateTime = System.currentTimeMillis();
     }

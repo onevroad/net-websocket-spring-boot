@@ -3,7 +3,7 @@ package org.net.websocket.core;
 import lombok.Getter;
 
 @Getter
-public class RetryMessage {
+public class ErrorRetryMessage {
 
     private String topic;
 
@@ -15,7 +15,7 @@ public class RetryMessage {
 
     private long lastSendTime = System.currentTimeMillis();
 
-    public RetryMessage(WebSocketClient client, String topic, String message) {
+    public ErrorRetryMessage(WebSocketClient client, String topic, String message) {
         this.client = client;
         this.topic = topic;
         this.message = message;
