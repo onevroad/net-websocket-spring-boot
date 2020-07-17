@@ -46,17 +46,17 @@ public class WebSocketServerService {
         List<WebSocketEventHandler> webSocketEventHandlers = handlers.get(topic);
         if (webSocketEventHandlers != null && !webSocketEventHandlers.isEmpty()) {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
-                String message = handler.onSubscribe(topic, data);
+                Object message = handler.onSubscribe(topic, data);
                 if (message != null) {
-                    client.sendSimple(topic, JSON.toJSONString(message));
+                    client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
             }
         }
         for (WebSocketCustomizeEventHandler customizeHandler : customizeHandlers) {
             if (customizeHandler.equalsTopic(topic)) {
-                String message = customizeHandler.onSubscribe(topic, data);
+                Object message = customizeHandler.onSubscribe(topic, data);
                 if (message != null) {
-                    client.sendSimple(topic, JSON.toJSONString(message));
+                    client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
             }
         }
@@ -66,17 +66,17 @@ public class WebSocketServerService {
         List<WebSocketEventHandler> webSocketEventHandlers = handlers.get(topic);
         if (webSocketEventHandlers != null && !webSocketEventHandlers.isEmpty()) {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
-                String message = handler.onMessage(topic, data);
+                Object message = handler.onMessage(topic, data);
                 if (message != null) {
-                    client.sendSimple(topic, JSON.toJSONString(message));
+                    client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
             }
         }
         for (WebSocketCustomizeEventHandler customizeHandler : customizeHandlers) {
             if (customizeHandler.equalsTopic(topic)) {
-                String message = customizeHandler.onMessage(topic, data);
+                Object message = customizeHandler.onMessage(topic, data);
                 if (message != null) {
-                    client.sendSimple(topic, JSON.toJSONString(message));
+                    client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
             }
         }
@@ -86,17 +86,17 @@ public class WebSocketServerService {
         List<WebSocketEventHandler> webSocketEventHandlers = handlers.get(topic);
         if (webSocketEventHandlers != null && !webSocketEventHandlers.isEmpty()) {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
-                String message = handler.onCancel(topic, data);
+                Object message = handler.onCancel(topic, data);
                 if (message != null) {
-                    client.sendSimple(topic, JSON.toJSONString(message));
+                    client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
             }
         }
         for (WebSocketCustomizeEventHandler customizeHandler : customizeHandlers) {
             if (customizeHandler.equalsTopic(topic)) {
-                String message = customizeHandler.onCancel(topic, data);
+                Object message = customizeHandler.onCancel(topic, data);
                 if (message != null) {
-                    client.sendSimple(topic, JSON.toJSONString(message));
+                    client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
             }
         }
