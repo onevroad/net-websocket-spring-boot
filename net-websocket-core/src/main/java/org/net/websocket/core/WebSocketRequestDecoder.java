@@ -32,7 +32,7 @@ public class WebSocketRequestDecoder {
             }
 
             if (input.containsKey(DATA)) {
-                String data = input.getString(DATA);
+                Object data = input.get(DATA);
                 request.setData(data);
             }
 

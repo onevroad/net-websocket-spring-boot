@@ -1,7 +1,5 @@
 package org.net.websocket.core;
 
-import com.alibaba.fastjson.JSON;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,11 +40,11 @@ public class WebSocketServerService {
         customizeHandlers.add(customizeHandler);
     }
 
-    public static void onSubscribe(WebSocketClient client, String topic, String data) {
+    public static void onSubscribe(WebSocketClient client, String topic, Object data) {
         List<WebSocketEventHandler> webSocketEventHandlers = handlers.get(topic);
         if (webSocketEventHandlers != null && !webSocketEventHandlers.isEmpty()) {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
-                Object message = handler.onSubscribe(topic, data);
+                Object message = handler.onSubscribe(topic, ObjectConvert.convertRequestData(data, handler.getClass()));
                 if (message != null) {
                     client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
@@ -54,7 +52,7 @@ public class WebSocketServerService {
         }
         for (WebSocketCustomizeEventHandler customizeHandler : customizeHandlers) {
             if (customizeHandler.equalsTopic(topic)) {
-                Object message = customizeHandler.onSubscribe(topic, data);
+                Object message = customizeHandler.onSubscribe(topic, ObjectConvert.convertRequestData(data, customizeHandler.getClass()));
                 if (message != null) {
                     client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
@@ -62,11 +60,11 @@ public class WebSocketServerService {
         }
     }
 
-    public static void onMessage(WebSocketClient client, String topic, String data) {
+    public static void onMessage(WebSocketClient client, String topic, Object data) {
         List<WebSocketEventHandler> webSocketEventHandlers = handlers.get(topic);
         if (webSocketEventHandlers != null && !webSocketEventHandlers.isEmpty()) {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
-                Object message = handler.onMessage(topic, data);
+                Object message = handler.onMessage(topic, ObjectConvert.convertRequestData(data, handler.getClass()));
                 if (message != null) {
                     client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
@@ -74,7 +72,7 @@ public class WebSocketServerService {
         }
         for (WebSocketCustomizeEventHandler customizeHandler : customizeHandlers) {
             if (customizeHandler.equalsTopic(topic)) {
-                Object message = customizeHandler.onMessage(topic, data);
+                Object message = customizeHandler.onMessage(topic, ObjectConvert.convertRequestData(data, customizeHandler.getClass()));
                 if (message != null) {
                     client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
@@ -82,11 +80,11 @@ public class WebSocketServerService {
         }
     }
 
-    public static void onCancel(WebSocketClient client, String topic, String data) {
+    public static void onCancel(WebSocketClient client, String topic, Object data) {
         List<WebSocketEventHandler> webSocketEventHandlers = handlers.get(topic);
         if (webSocketEventHandlers != null && !webSocketEventHandlers.isEmpty()) {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
-                Object message = handler.onCancel(topic, data);
+                Object message = handler.onCancel(topic, ObjectConvert.convertRequestData(data, handler.getClass()));
                 if (message != null) {
                     client.sendSimple(topic, ObjectConvert.toJson(message));
                 }
@@ -94,7 +92,7 @@ public class WebSocketServerService {
         }
         for (WebSocketCustomizeEventHandler customizeHandler : customizeHandlers) {
             if (customizeHandler.equalsTopic(topic)) {
-                Object message = customizeHandler.onCancel(topic, data);
+                Object message = customizeHandler.onCancel(topic, ObjectConvert.convertRequestData(data, customizeHandler.getClass()));
                 if (message != null) {
                     client.sendSimple(topic, ObjectConvert.toJson(message));
                 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 @Slf4j
 @WebSocketListener
-public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String> {
+public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String, String> {
 
     @Value("${test.topic}")
     private String topic;

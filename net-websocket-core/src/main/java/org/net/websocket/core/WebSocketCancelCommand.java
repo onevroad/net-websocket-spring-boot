@@ -23,7 +23,7 @@ public class WebSocketCancelCommand implements Runnable {
         }
     }
 
-    private void cancel(String data) {
+    private void cancel(Object data) {
         WebSocketClientGroup group = WebSocketClientService.getClientGroup();
         for (WebSocketClientMap map : group.values()) {
             if (map.containsKey(request.getContext().channel().id())) {
@@ -33,7 +33,7 @@ public class WebSocketCancelCommand implements Runnable {
         }
     }
 
-    private void cancel(String topic, String data) {
+    private void cancel(String topic, Object data) {
         WebSocketClientGroup group = WebSocketClientService.getClientGroup();
         if (group.containsKey(topic)) {
             WebSocketClientMap map = group.get(topic);

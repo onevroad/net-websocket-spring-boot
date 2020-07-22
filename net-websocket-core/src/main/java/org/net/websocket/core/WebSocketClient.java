@@ -55,7 +55,7 @@ public class WebSocketClient {
         lastUpdateTime = System.currentTimeMillis();
     }
 
-    public void cancel(String data) {
+    public void cancel(Object data) {
         for (String topic : topics) {
             WebSocketServerService.onCancel(this, topic, data);
         }
@@ -63,7 +63,7 @@ public class WebSocketClient {
         lastUpdateTime = System.currentTimeMillis();
     }
 
-    public void cancel(String topic, String data) {
+    public void cancel(String topic, Object data) {
         if (this.topics.contains(topic)) {
             this.topics.remove(topic);
             WebSocketServerService.onCancel(this, topic, data);

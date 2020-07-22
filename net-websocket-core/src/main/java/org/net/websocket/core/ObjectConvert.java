@@ -2,6 +2,7 @@ package org.net.websocket.core;
 
 import com.alibaba.fastjson.JSON;
 
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 public class ObjectConvert {
@@ -30,6 +31,22 @@ public class ObjectConvert {
 
     public static <T> T convert(String data, Type type) {
         return JSON.parseObject(data, type);
+    }
+
+    public static Object convertRequestData(Object data, Class<?> handlerClass) {
+        Class<?> dataClass = Object.class;
+        Type[] genericInterfaces = handlerClass.getGenericInterfaces();
+        if (genericInterfaces.length > 0) {
+            Type genericInterface = genericInterfaces[0];
+            if (genericInterface instanceof ParameterizedType) {
+                ParameterizedType parameterizedType = (ParameterizedType) genericInterface;
+                dataClass = (Class<?>) parameterizedType.getActualTypeArguments()[0];
+                if (data.getClass().getName().equals(dataClass.getName())) {
+                    return data;
+                }
+            }
+        }
+        return convert(data, dataClass);
     }
 
     public static String toJson(Object data) {

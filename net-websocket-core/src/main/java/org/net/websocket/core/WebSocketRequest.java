@@ -25,5 +25,5 @@ public class WebSocketRequest {
     /**
      * 消息内容
      */
-    private String data;
+    private Object data;
 }
