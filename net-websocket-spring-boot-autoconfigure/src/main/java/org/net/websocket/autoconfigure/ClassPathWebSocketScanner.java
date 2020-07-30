@@ -6,6 +6,7 @@ import org.springframework.beans.factory.config.BeanDefinitionHolder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
+import org.springframework.lang.NonNull;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -23,7 +24,7 @@ public class ClassPathWebSocketScanner extends ClassPathBeanDefinitionScanner {
     }
 
     @Override
-    protected Set<BeanDefinitionHolder> doScan(String... basePackages) {
+    protected Set<BeanDefinitionHolder> doScan(@NonNull String... basePackages) {
         Set<BeanDefinitionHolder> beanDefinitions = super.doScan(basePackages);
         if (beanDefinitions.isEmpty()) {
             this.logger.warn("No WebSocket handler was found in '" + Arrays.toString(basePackages) + "' package. Please check your configuration.");
@@ -32,7 +33,7 @@ public class ClassPathWebSocketScanner extends ClassPathBeanDefinitionScanner {
     }
 
     @Override
-    protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
+    protected boolean isCandidateComponent(@NonNull AnnotatedBeanDefinition beanDefinition) {
         return super.isCandidateComponent(beanDefinition);
     }
 }
