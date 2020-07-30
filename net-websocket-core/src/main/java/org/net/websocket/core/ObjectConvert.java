@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 public class ObjectConvert {
 
     public static <T> T convert(Object source, Class<T> clazz) {
-        return JSON.parseObject(JSON.toJSONString(source), clazz);
+        return JSON.parseObject(toJson(source), clazz);
     }
 
     /**

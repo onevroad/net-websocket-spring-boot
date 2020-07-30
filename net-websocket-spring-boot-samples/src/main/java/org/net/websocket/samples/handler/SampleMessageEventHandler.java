@@ -3,32 +3,32 @@ package org.net.websocket.samples.handler;
 import lombok.extern.slf4j.Slf4j;
 import org.net.websocket.annotation.WebSocketListener;
 import org.net.websocket.core.WebSocketEventHandler;
-import org.net.websocket.samples.model.User;
+import org.net.websocket.samples.model.Demo;
 
 @Slf4j
 @WebSocketListener("test")
-public class SampleMessageEventHandler implements WebSocketEventHandler<User, User> {
+public class SampleMessageEventHandler implements WebSocketEventHandler<Demo, Demo> {
     @Override
-    public User onSubscribe(String topic, User data) {
+    public Demo onSubscribe(String topic, Demo data) {
         log.info("subscribe topic: {}, data: {}", topic, data);
-        User user = new User();
-        user.setName("subscribe");
-        return user;
+        Demo demo = new Demo();
+        demo.setName("subscribe");
+        return demo;
     }
 
     @Override
-    public User onMessage(String topic, User data) {
+    public Demo onMessage(String topic, Demo data) {
         log.info("message topic: {}, data: {}", topic, data);
-        User user = new User();
-        user.setName("message");
-        return user;
+        Demo demo = new Demo();
+        demo.setName("message");
+        return demo;
     }
 
     @Override
-    public User onCancel(String topic, User data) {
+    public Demo onCancel(String topic, Demo data) {
         log.info("cancel topic: {}, data: {}", topic, data);
-        User user = new User();
-        user.setName("cancel");
-        return user;
+        Demo demo = new Demo();
+        demo.setName("cancel");
+        return demo;
     }
 }
