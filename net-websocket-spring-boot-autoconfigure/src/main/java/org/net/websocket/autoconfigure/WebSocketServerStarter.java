@@ -1,8 +1,8 @@
 package org.net.websocket.autoconfigure;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import org.net.websocket.core.WebSocketRetryService;
-import org.net.websocket.core.WebSocketServerService;
+import org.net.websocket.core.retry.WebSocketRetryService;
+import org.net.websocket.core.server.WebSocketServerService;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;

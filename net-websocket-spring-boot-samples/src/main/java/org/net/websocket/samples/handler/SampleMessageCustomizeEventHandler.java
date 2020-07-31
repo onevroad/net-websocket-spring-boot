@@ -2,7 +2,7 @@ package org.net.websocket.samples.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.net.websocket.annotation.WebSocketListener;
-import org.net.websocket.core.WebSocketCustomizeEventHandler;
+import org.net.websocket.core.handler.WebSocketCustomizeEventHandler;
 import org.springframework.beans.factory.annotation.Value;
 
 @Slf4j
