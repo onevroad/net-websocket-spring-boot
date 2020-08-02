@@ -40,7 +40,7 @@
 <dependency>
     <groupId>org.onevroad</groupId>
     <artifactId>net-websocket-spring-boot-starter</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
@@ -49,7 +49,7 @@
 对于确定的topic，可实现WebSocketEventHandler事件处理器，通过注解管理topic
 ```java
 @WebsocketListener("test")
-public class SampleMessageEventHandler implements WebSocketEventHandler {
+public class SampleMessageEventHandler implements WebSocketEventHandler<String, String> {
     @Override
     public String onSubscribe(String topic, String data) {
         return "subscribe success!";
@@ -69,7 +69,7 @@ public class SampleMessageEventHandler implements WebSocketEventHandler {
 对应动态的topic，可实现WebSocketCustomizeEventHandler事件处理器，通过equalsTopic管理topic
 ```java
 @WebsocketListener
-public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler {
+public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String, String> {
     @Override
     public boolean equalsTopic(String topic) {
         return "test2".equals(topic);
@@ -132,5 +132,6 @@ public class SendMessageHandler {
 ## 后续发展
 - ~~发送消息支持失败重试~~（0.1.7-SNAPSHOT）
 - ~~发送消息支持队列缓存，重连后立即推送（单订阅者）~~（0.1.7-SNAPSHOT）
-- 发送数据支持多种数据类型
-- 接收数据支持自定义数据类型
+- ~~发送数据支持多种数据类型~~
+- ~~接收数据支持自定义数据类型~~
+- 支持注解方式接入

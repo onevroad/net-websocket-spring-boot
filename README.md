@@ -40,7 +40,7 @@ Support jdk version 1.8 or 1.8+
 <dependency>
     <groupId>org.onevroad</groupId>
     <artifactId>net-websocket-spring-boot-starter</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 </dependency>
 ```
 
@@ -49,7 +49,7 @@ Support jdk version 1.8 or 1.8+
 For the definite topics, you can implement WebSocketEventHandler with the WebsocketListener annotation.
 ```java
 @WebsocketListener("test")
-public class SampleMessageEventHandler implements WebSocketEventHandler {
+public class SampleMessageEventHandler implements WebSocketEventHandler<String, String> {
     @Override
     public String onSubscribe(String topic, String data) {
         return "subscribe success!";
@@ -69,7 +69,7 @@ public class SampleMessageEventHandler implements WebSocketEventHandler {
 For the dynamic topics, you can implement WebSocketCustomizeEventHandler and override the equalsTopic method.
 ```java
 @WebsocketListener
-public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler {
+public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String, String> {
     @Override
     public boolean equalsTopic(String topic) {
         return "test2".equals(topic);
