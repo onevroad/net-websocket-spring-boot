@@ -8,6 +8,9 @@ import java.lang.reflect.Type;
 public class ObjectConverter {
 
     public static <T> T convert(Object source, Class<T> clazz) {
+        if (clazz.getName().equals("java.lang.String")) {
+            return (T) toJson(source);
+        }
         return JSON.parseObject(toJson(source), clazz);
     }
 

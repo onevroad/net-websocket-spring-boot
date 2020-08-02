@@ -7,6 +7,6 @@ import java.lang.reflect.Parameter;
 public class RequestDataConverter {
 
     public Object convert(Parameter parameter, Object value) {
-        return ObjectConverter.convertRequestData(value, parameter.getType());
+        return ObjectConverter.convert(value, parameter.getType());
     }
 }

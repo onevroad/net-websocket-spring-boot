@@ -12,6 +12,7 @@ import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
 
@@ -24,10 +25,16 @@ public class WebSocketHandlerBeanPostProcessor implements BeanPostProcessor {
         WebSocketListener annotation = clazz.getAnnotation(WebSocketListener.class);
         if (annotation != null) {
             if (WebSocketEventHandler.class.isAssignableFrom(clazz)) {
+                if (StringUtils.isEmpty(annotation.value())) {
+                    throw new IllegalArgumentException("The topic is missing on the class: " + clazz.getName() + "");
+                }
                 WebSocketServerService.addHandler(annotation.value(), (WebSocketEventHandler) bean);
             } else if (WebSocketCustomizeEventHandler.class.isAssignableFrom(clazz)) {
                 WebSocketServerService.addCustomizeHandler((WebSocketCustomizeEventHandler) bean);
             } else {
+                if (StringUtils.isEmpty(annotation.value())) {
+                    throw new IllegalArgumentException("The topic is missing on the class: " + clazz.getName() + "");
+                }
                 Method[] methods = clazz.getMethods();
                 if (methods.length > 0) {
                     for (Method method : methods) {
