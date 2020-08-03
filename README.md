@@ -44,9 +44,9 @@ Support jdk version 1.8 or 1.8+
 </dependency>
 ```
 
-- You need implement WebSocketEventHandler or WebSocketCustomizeEventHandler for every topic that you have.
+- You need implement WebSocketEventHandler<Request, Response> or WebSocketCustomizeEventHandler<Request, Response> for every topic that you have.
 
-For the definite topics, you can implement WebSocketEventHandler with the WebsocketListener annotation.
+For the definite topics, you can implement WebSocketEventHandler<Request, Response> with the WebsocketListener annotation.
 ```java
 @WebsocketListener("test")
 public class SampleMessageEventHandler implements WebSocketEventHandler<String, String> {
@@ -66,7 +66,7 @@ public class SampleMessageEventHandler implements WebSocketEventHandler<String, 
     }
 }
 ```
-For the dynamic topics, you can implement WebSocketCustomizeEventHandler and override the equalsTopic method.
+For the dynamic topics, you can implement WebSocketCustomizeEventHandler<Request, Response> and override the equalsTopic method.
 ```java
 @WebsocketListener
 public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String, String> {
