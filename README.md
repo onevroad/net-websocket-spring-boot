@@ -14,7 +14,7 @@ Support jdk version 1.8 or 1.8+
 ```
 - e:event, t:topic, d:data
 - support event type：subscribe, message, cancel, heartbeat
-- Except for the heartbeat event, the topic is required.You can send multiple topics at the same time.
+- Except for the heartbeat event, the topic is a required param.You can send multiple topics at the same time.
 - You can customize the response data format.
 
 ## Heartbeat Event
