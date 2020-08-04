@@ -40,12 +40,39 @@ Support jdk version 1.8 or 1.8+
 <dependency>
     <groupId>org.onevroad</groupId>
     <artifactId>net-websocket-spring-boot-starter</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0-SNAPSHOT</version>
 </dependency>
 ```
 
-- You need implement WebSocketEventHandler<Request, Response> or WebSocketCustomizeEventHandler<Request, Response> for every topic that you have.
+- You have two choices to handle event, add annotation or implement WebSocketEventHandler<Request, Response> or WebSocketCustomizeEventHandler<Request, Response> for every topic that you have.
 
+### Add annotation
+Add the annotation on the method to handle event.  
+You can define the topic for every annotation.
+The priority of topic is: method annotation topic > class annotation topic 
+The supporting params is: topic and data. You need add RequestTopic annotation for the topic and add RequestData annotation for the data.
+```java
+@WebSocketListener("test-annotation")
+public class SampleMessageAnnotationEventHandler {
+
+    @OnSubscribe("test-annotation-subscribe")
+    public String onSubscribe(@RequestTopic String topic, @RequestData String data) {
+        return "subscribe success!";
+    }
+
+    @OnMessage
+    public String onMessage(@RequestTopic String topic, @RequestData String data) {
+        return "message received!";
+    }
+
+    @OnCancel("test-annotation-cancel")
+    public String onCancel(@RequestTopic String topic, @RequestData String data) {
+        return "cancel success!";
+    }
+}
+```
+
+### Implement interface
 For the definite topics, you can implement WebSocketEventHandler<Request, Response> with the WebsocketListener annotation.
 ```java
 @WebsocketListener("test")
