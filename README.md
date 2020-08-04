@@ -14,25 +14,25 @@ Support jdk version 1.8 or 1.8+
 ```
 - e:event, t:topic, d:data
 - support event type：subscribe, message, cancel, heartbeat
-- The topic is required except for the heartbeat events.You can send multiple topics at the same time.
+- Except for the heartbeat event, the topic is required.You can send multiple topics at the same time.
 - You can customize the response data format.
 
 ## Heartbeat Event
-- The server will send a heartbeat event when the client and server have no data interaction within 1 minute. The data format that the server send is like this：
+- The server will send a heartbeat event when the client and server have no data interaction within 1 minute. The data format that the server send is like this:
 ```json
 {
   "e": "heartbeat",
   "d": "ping"
 }
 ```
-- If the client receive a heartbeat event, please send a data for responsing the server. The data format is like this：
+- If the client receive a heartbeat event, please send a data to the server. The data format is like this:
 ```json
 {
   "e": "heartbeat",
   "d": "pong"
 }
 ```
-- The connection will be disconnected when the server who sended the heartbeat event twice din't receive any response.
+- The connection will be disconnected when the server who sent the heartbeat event twice din't receive any response.
 
 ## Quick Start
 - add maven dependency
@@ -44,9 +44,9 @@ Support jdk version 1.8 or 1.8+
 </dependency>
 ```
 
-- You need implement WebSocketEventHandler or WebSocketCustomizeEventHandler for every topic that you have.
+- You need implement WebSocketEventHandler<Request, Response> or WebSocketCustomizeEventHandler<Request, Response> for every topic that you have.
 
-For the definite topics, you can implement WebSocketEventHandler with the WebsocketListener annotation.
+For the definite topics, you can implement WebSocketEventHandler<Request, Response> with the WebsocketListener annotation.
 ```java
 @WebsocketListener("test")
 public class SampleMessageEventHandler implements WebSocketEventHandler<String, String> {
@@ -66,7 +66,7 @@ public class SampleMessageEventHandler implements WebSocketEventHandler<String, 
     }
 }
 ```
-For the dynamic topics, you can implement WebSocketCustomizeEventHandler and override the equalsTopic method.
+For the dynamic topics, you can implement WebSocketCustomizeEventHandler<Request, Response> and override the equalsTopic method.
 ```java
 @WebsocketListener
 public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String, String> {
@@ -120,7 +120,7 @@ net:
 
 - send message
 
-You can use the publish method of the WebSocketMessagePublisher class to send your message.
+You can use the method of the WebSocketMessagePublisher class to send your message.
 ```java
 public class SendMessageHandler {
     public static void send(String topic, String message) {

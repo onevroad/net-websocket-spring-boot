@@ -43,6 +43,7 @@
     <version>0.4.0-SNAPSHOT</version>
 </dependency>
 ```
+
 - 定义每个topic的事件处理器，返回值是对客户端的响应数据，返回值为空则不响应
 ### 通过注解方式
 在类的方法上添加对应的注解，可以代理到对应的事件。  
@@ -69,7 +70,7 @@ public class SampleMessageAnnotationEventHandler {
 }
 ```
 ### 通过实现接口方式
-对于确定的topic，可实现WebSocketEventHandler事件处理器，通过注解管理topic
+对于确定的topic，可实现WebSocketEventHandler<Request, Response>事件处理器，通过注解管理topic
 ```java
 @WebsocketListener("test")
 public class SampleMessageEventHandler implements WebSocketEventHandler<String, String> {
@@ -89,7 +90,7 @@ public class SampleMessageEventHandler implements WebSocketEventHandler<String, 
     }
 }
 ```
-对应动态的topic，可实现WebSocketCustomizeEventHandler事件处理器，通过equalsTopic管理topic
+对应动态的topic，可实现WebSocketCustomizeEventHandler<Request, Response>事件处理器，通过equalsTopic管理topic
 ```java
 @WebsocketListener
 public class SampleMessageCustomizeEventHandler implements WebSocketCustomizeEventHandler<String, String> {
