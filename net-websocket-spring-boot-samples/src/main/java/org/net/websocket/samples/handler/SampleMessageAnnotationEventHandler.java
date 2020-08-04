@@ -10,7 +10,7 @@ import org.net.websocket.core.annotation.RequestTopic;
 @WebSocketListener("test-annotation")
 public class SampleMessageAnnotationEventHandler {
 
-    @OnSubscribe
+    @OnSubscribe("test-annotation-subscribe")
     public String onSubscribe(@RequestTopic String topic, @RequestData String data) {
         return "subscribe success!";
     }
@@ -20,7 +20,7 @@ public class SampleMessageAnnotationEventHandler {
         return "message received!";
     }
 
-    @OnCancel
+    @OnCancel("test-annotation-cancel")
     public String onCancel(@RequestTopic String topic, @RequestData String data) {
         return "cancel success!";
     }

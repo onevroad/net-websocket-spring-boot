@@ -5,11 +5,11 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import org.net.websocket.annotation.WebSocketScan;
 import org.net.websocket.core.server.WebSocketMessagePublisher;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 
-@EnableAutoConfiguration
+@SpringBootApplication
 @WebSocketScan(basePackages = {"org.net.websocket.samples.handler"})
 public class WebSocketApplication {
 

@@ -1,5 +1,7 @@
 package org.net.websocket.annotation;
 
+import org.springframework.core.annotation.AliasFor;
+
 import java.lang.annotation.*;
 
 
@@ -8,8 +10,12 @@ import java.lang.annotation.*;
 @Documented
 public @interface WebSocketListener {
 
+    @AliasFor("topic")
+    String value() default "";
+
     /**
      * 订阅主题，topic
      */
-    String value() default "";
+    @AliasFor("value")
+    String topic() default "";
 }
