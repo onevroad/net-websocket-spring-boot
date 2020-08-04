@@ -40,12 +40,35 @@
 <dependency>
     <groupId>org.onevroad</groupId>
     <artifactId>net-websocket-spring-boot-starter</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.0-SNAPSHOT</version>
 </dependency>
 ```
-
 - 定义每个topic的事件处理器，返回值是对客户端的响应数据，返回值为空则不响应
+### 通过注解方式
+在类的方法上添加对应的注解，可以代理到对应的事件。  
+每个注解可以自定义topic，topic的优先级为method annotation value > class annotation value。  
+入参支持topic和data，需要分别加上对应注解RequestTopic和RequestData。
+```java
+@WebSocketListener("test-annotation")
+public class SampleMessageAnnotationEventHandler {
 
+    @OnSubscribe("test-annotation-subscribe")
+    public String onSubscribe(@RequestTopic String topic, @RequestData String data) {
+        return "subscribe success!";
+    }
+
+    @OnMessage
+    public String onMessage(@RequestTopic String topic, @RequestData String data) {
+        return "message received!";
+    }
+
+    @OnCancel("test-annotation-cancel")
+    public String onCancel(@RequestTopic String topic, @RequestData String data) {
+        return "cancel success!";
+    }
+}
+```
+### 通过实现接口方式
 对于确定的topic，可实现WebSocketEventHandler事件处理器，通过注解管理topic
 ```java
 @WebsocketListener("test")
@@ -130,8 +153,8 @@ public class SendMessageHandler {
 }
 ```
 ## 后续发展
-- ~~发送消息支持失败重试~~（0.1.7-SNAPSHOT）
-- ~~发送消息支持队列缓存，重连后立即推送（单订阅者）~~（0.1.7-SNAPSHOT）
-- ~~发送数据支持多种数据类型~~
-- ~~接收数据支持自定义数据类型~~
-- 支持注解方式接入
+- ~~发送消息支持失败重试~~（0.1.7）
+- ~~发送消息支持队列缓存，重连后立即推送（单订阅者）~~（0.1.7）
+- ~~发送数据支持多种数据类型~~（0.3.0）
+- ~~接收数据支持自定义数据类型~~（0.3.0）
+- ~~支持注解方式接入~~（0.4.0-SNAPSHOT）
