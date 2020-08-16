@@ -40,7 +40,7 @@
 <dependency>
     <groupId>org.onevroad</groupId>
     <artifactId>net-websocket-spring-boot-starter</artifactId>
-    <version>0.4.0-SNAPSHOT</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
@@ -158,4 +158,4 @@ public class SendMessageHandler {
 - ~~发送消息支持队列缓存，重连后立即推送（单订阅者）~~（0.1.7）
 - ~~发送数据支持多种数据类型~~（0.3.0）
 - ~~接收数据支持自定义数据类型~~（0.3.0）
-- ~~支持注解方式接入~~（0.4.0-SNAPSHOT）
+- ~~支持注解方式接入~~（0.4.0）
