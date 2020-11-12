@@ -4,6 +4,8 @@ The WebSocket is based on netty. It's easier to use for somebody who want to bui
 
 Support jdk version 1.8 or 1.8+
 
+[中文文档](https://github.com/onevroad/net-websocket-spring-boot/blob/master/README_cn.md "中文文档")
+
 ## Request Data Format
 ```json
 {
