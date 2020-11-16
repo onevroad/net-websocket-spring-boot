@@ -16,9 +16,14 @@ public class WebSocketSubscribeCommand implements Runnable {
 
     @Override
     public void run() {
-        for (String topic : request.getTopic()) {
+        for (int i = 0; i < request.getTopic().length; i++) {
+            String topic = request.getTopic()[i];
+            String scope = null;
+            if (request.getScope() != null && request.getScope().length > i) {
+                scope = request.getScope()[i];
+            }
             WebSocketClient client = WebSocketClientService.subscribe(request.getContext(), topic);
-            WebSocketServerService.onSubscribe(client, topic, request.getData());
+            WebSocketServerService.onSubscribe(client, topic, scope, request.getData());
         }
     }
 }

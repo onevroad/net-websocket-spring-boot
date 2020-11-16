@@ -65,11 +65,11 @@ public class WebSocketServerService {
         cancelHandlerMethods.computeIfAbsent(topic, k -> new ArrayList<>()).add(handlerMethod);
     }
 
-    public static void onSubscribe(WebSocketClient client, String topic, Object data) {
+    public static void onSubscribe(WebSocketClient client, String topic, String scope, Object data) {
         List<WebSocketEventHandler> webSocketEventHandlers = handlers.get(topic);
         if (webSocketEventHandlers != null && !webSocketEventHandlers.isEmpty()) {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
-                Object message = handler.onSubscribe(topic, ObjectConverter.convertRequestData(data, handler.getClass()));
+                Object message = handler.onSubscribe(topic, scope, ObjectConverter.convertRequestData(data, handler.getClass()));
                 if (message != null) {
                     client.sendSimple(topic, ObjectConverter.toJson(message));
                 }
@@ -88,11 +88,11 @@ public class WebSocketServerService {
         executeHandlerMethod(client, topic, data, subscribeHandlerMethods);
     }
 
-    public static void onMessage(WebSocketClient client, String topic, Object data) {
+    public static void onMessage(WebSocketClient client, String topic, String scope, Object data) {
         List<WebSocketEventHandler> webSocketEventHandlers = handlers.get(topic);
         if (webSocketEventHandlers != null && !webSocketEventHandlers.isEmpty()) {
             for (WebSocketEventHandler handler : webSocketEventHandlers) {
-                Object message = handler.onMessage(topic, ObjectConverter.convertRequestData(data, handler.getClass()));
+                Object message = handler.onMessage(topic, scope, ObjectConverter.convertRequestData(data, handler.getClass()));
                 if (message != null) {
                     client.sendSimple(topic, ObjectConverter.toJson(message));
                 }
