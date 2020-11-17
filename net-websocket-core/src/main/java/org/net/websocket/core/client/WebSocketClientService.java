@@ -63,15 +63,15 @@ public class WebSocketClientService {
         }
     }
 
-    public static void publish(String topic, String message) {
-        WebSocketCommandExecutor.execute(new WebSocketPublishCommand(topic, message));
+    public static void publish(String topic, String scope, String message) {
+        WebSocketCommandExecutor.execute(new WebSocketPublishCommand(topic, scope, message));
     }
 
     public static WebSocketClientGroup getClientGroup() {
         return group;
     }
 
-    public static boolean publishSync(String topic, String message) {
+    public static boolean publishSync(String topic, String scope, String message) {
         if (group.containsKey(topic)) {
             WebSocketClientMap clients = group.get(topic);
             if (clients.isEmpty()) {

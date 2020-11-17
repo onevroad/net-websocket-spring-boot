@@ -21,7 +21,7 @@ public class WebSocketApplication {
     private static void test() {
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1, new ThreadFactoryBuilder().setNameFormat("test-%d").build());
         executor.scheduleAtFixedRate(() -> {
-            WebSocketMessagePublisher.publish("test","test-123");
+            WebSocketMessagePublisher.publish("test", "123","test-123");
         }, 0, 1, TimeUnit.SECONDS);
     }
 }
