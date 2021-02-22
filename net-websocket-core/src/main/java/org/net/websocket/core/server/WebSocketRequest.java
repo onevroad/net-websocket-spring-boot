@@ -23,11 +23,6 @@ public class WebSocketRequest {
     private String[] topic;
 
     /**
-     * 订阅范围
-     */
-    private String[] scope;
-
-    /**
      * 消息内容
      */
     private Object data;

@@ -7,19 +7,17 @@ import org.net.websocket.core.retry.WebSocketRetryService;
 public class WebSocketPublishCommand implements Runnable {
 
     private String topic;
-    private String scope;
     private String message;
 
-    public WebSocketPublishCommand(String topic, String scope, String message) {
+    public WebSocketPublishCommand(String topic, String message) {
         this.topic = topic;
-        this.scope = scope;
         this.message = message;
     }
 
     @Override
     public void run() {
-        if (!WebSocketClientService.publishSync(topic, scope, message)) {
-            NotFoundRetryMessage notFoundRetryMessage = new NotFoundRetryMessage(topic, scope, message);
+        if (!WebSocketClientService.publishSync(topic, message)) {
+            NotFoundRetryMessage notFoundRetryMessage = new NotFoundRetryMessage(topic, message);
             WebSocketRetryService.retry(notFoundRetryMessage);
         }
     }

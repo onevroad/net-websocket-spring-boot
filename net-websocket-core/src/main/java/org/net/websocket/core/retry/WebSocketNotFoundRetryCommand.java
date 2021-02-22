@@ -21,7 +21,7 @@ public class WebSocketNotFoundRetryCommand implements Runnable {
                     if (WebSocketRetryService.isRetryTime(notFoundRetryMessage.getLastSendTime())) {
                         iterator.remove();
                         notFoundRetryMessage.retry();
-                        if (!WebSocketClientService.publishSync(notFoundRetryMessage.getTopic(), notFoundRetryMessage.getScope(), notFoundRetryMessage.getMessage())) {
+                        if (!WebSocketClientService.publishSync(notFoundRetryMessage.getTopic(), notFoundRetryMessage.getMessage())) {
                             retryFailedMessages.add(notFoundRetryMessage);
                         }
                     }
