@@ -45,7 +45,7 @@
         <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
         <netty.version>4.1.42.Final</netty.version>
         <fastjson.version>1.2.58</fastjson.version>
-        <guava.version>28.0-jre</guava.version>
+        <guava.version>29.0-jre</guava.version>
     </properties>
 
 
