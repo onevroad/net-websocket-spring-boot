@@ -145,6 +145,14 @@ net:
     worker-group-threads: 0
     # Request path
     end-point: /ws
+    # Retry config
+    retry:
+      # Whether to enable the retry
+      enable: true
+      # The maximum number of retry times, the default is 3 times
+      max-retry-time: 3
+      # Retry interval, unit: milliseconds, default 1000ms
+      retry-interval: 1000
 ```
 
 - send message
